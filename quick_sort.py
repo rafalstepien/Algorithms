@@ -2,9 +2,11 @@ import random, time, statistics, math
 from datetime import datetime
 from matplotlib import pyplot as plt
 
+
 def get_time_measurements(iterations):
     print('\nTIME MEASUREMENTS\n')
-    print('-------------------------------------------------------------------------------------------------------------------')
+    print(
+        '-------------------------------------------------------------------------------------------------------------------')
 
     data_last = normalize_data(get_data(sort_list1, low, high, partition_last, iterations))
     data_first = normalize_data(get_data(sort_list2, low, high, partition_first, iterations))
@@ -33,14 +35,16 @@ def get_time_measurements(iterations):
     print('MEAN TIME: ', statistics.mean(data_median))
     print('\n')
 
-def plot_time_data(iterations, list_of_list_of_times): # y - lista czasów
-    x = list(range(1, iterations+1))
+
+def plot_time_data(iterations, list_of_list_of_times):  # y - lista czasów
+    x = list(range(1, iterations + 1))
     fig, ax = plt.subplots()
     names_to_legend = ['last', 'first', 'median', 'random']
     for index, times_list in enumerate(list_of_list_of_times):
         ax.plot(x, times_list, label=names_to_legend[index])
     ax.legend()
     plt.show()
+
 
 def get_data(lista, start, stop, func, iterations):
     times = []
@@ -50,9 +54,11 @@ def get_data(lista, start, stop, func, iterations):
         times.append(time.perf_counter() - t1)
     return times
 
+
 def normalize_data(list_of_data):
     normalized = [math.log10(number + 1) for number in list_of_data]
     return normalized
+
 
 def partition(lst, start, stop):
     pivot_index = stop
@@ -90,7 +96,7 @@ def partition_first(lst, start, stop):
     return partition(lst, start, stop)
 
 
-def partition_median(lst, start, stop):
+def partition_middle(lst, start, stop):
     med = (len(lst)) // 2
     lst[stop], lst[med] = lst[med], lst[stop]
     return partition(lst, start, stop)
@@ -123,7 +129,7 @@ if __name__ == '__main__':
 
     t1 = time.perf_counter()
     sort_list4 = sort_list[:]
-    quick_sort(sort_list4, low, high, partition_median)
+    quick_sort(sort_list4, low, high, partition_middle)
     t2 = time.perf_counter()
     print("Sorted list of size by Median {} in {}".format(lenght, t2 - t1))
 

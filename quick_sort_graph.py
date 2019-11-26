@@ -10,7 +10,7 @@ def get_time_measurements(iterations):
     data_random = normalize_data(get_data(sort_list3, low, high, partition_rand, iterations))
     data_median = normalize_data(get_data(sort_list4, low, high, partition_middle, iterations))
 
-    plot_time_data(iterations, [data_last, data_first, data_median, data_random])
+    plot_time_iterations_data(iterations, [data_last, data_first, data_median, data_random])
 
     print('*** LAST ***')
     # print(data_last)
@@ -32,14 +32,22 @@ def get_time_measurements(iterations):
     print('MEAN TIME: ', statistics.mean(data_median))
     print('\n')
 
-def plot_time_data(iterations, list_of_list_of_times): # y - lista czasów
-    x = list(range(1, iterations+1))
+def plot_time_iterations_data(no_iterations, list_of_list_of_times): # y - lista czasów
+    x = list(range(1, no_iterations+1))
     fig, ax = plt.subplots()
     names_to_legend = ['last', 'first', 'median', 'random']
     for index, times_list in enumerate(list_of_list_of_times):
         ax.plot(x, times_list, label=names_to_legend[index])
     ax.legend()
     plt.show()
+
+# def plot_length_time_data(no_iterations, ):
+# 	fig, ax = plt.subplots()
+# 	names_to_legend = ['last', 'first', 'median', 'random']
+# 	for index, times_list in enumerate()
+# 		ax.plot(x, y, label=names_to_legend[index])
+# 	ax.legen()
+# 	plt.show()
 
 def get_data(lista, start, stop, func, iterations):
     times = []
@@ -96,7 +104,7 @@ def partition_middle(lst, start, stop):
 
 
 if __name__ == '__main__':
-    sort_list = random.sample(range(200000), 5000)
+    sort_list = random.sample(range(20000), 150)
     lenght = len(sort_list)
     random.shuffle(sort_list)
 

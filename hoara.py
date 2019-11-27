@@ -1,5 +1,5 @@
 import random
-from quick_sort import partition, partition_first, partition_median, partition_rand, partition_last
+from quick_sort import partition, partition_first, partition_middle, partition_rand, partition_last
 
 
 def select(lst, start, stop, k, fun):
@@ -16,4 +16,4 @@ sort_list = [1, 9, 7, 2, 5, 8, 3, 6, 4]
 low = 0
 high = len(sort_list) - 1
 
-print(select(sort_list, low, high, 4, partition_median))
+print(select(sort_list, low, high, 4, partition_middle))

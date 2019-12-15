@@ -7,8 +7,11 @@
 \usepackage{geometry}
 \usepackage{indentfirst}
 \usepackage{arydshln}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
 \title{Quicksort}
-\author{Rafał Stępień | Krzysztof Kotlarz}
+\author{Rafał Stępień Krzysztof Kotlarz}
 \date{\today}
 \begin{document}
 \renewcommand{\tabcolsep}{10mm}
@@ -22,7 +25,7 @@
  
        \vspace{1.5cm}
  
-       Rafał Stępień, Krzysztof Kotlarz \\
+       Rafał Stępień | Krzysztof Kotlarz \\
        \vspace{2cm}
 
  
@@ -419,6 +422,25 @@ def partition_middle(lst, start, stop):
     return partition(lst, start, stop)
 \end{Verbatim}
 \section{Testy}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5, transform shape]
+\begin{axis}[grid=both,
+      mark = none,
+      xmin = 0, ymin = 0,
+      xmax = 16,ymax = 16,
+      axis lines*=middle,
+      enlargelimits=upper,
+      clip=false,
+      xtick={0,2,...,16},
+      ytick={0,2,...,16}]
+\addplot[red, domain=0:5,restrict y to domain=0:18, samples=100]  {pow(2,x)} node[right,anchor=north west]{$y=2^n$};
+\addplot[blue, domain=0:18,restrict y to domain=0:18, samples=100]  {x} node[anchor=north east,inner xsep=3ex] {$y=n$};
+\addplot[green, domain=0:18,restrict y to domain=0:18, samples=100]  {ln(x)/ln(2)} node[right,anchor=north west]{$log_2x$};
+\addplot[yellow, domain=0:18,restrict y to domain=0:18, samples=100]  {2*(ln(x)/ln(2))} node[right,anchor=north west]{$2log_2x$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
 \section{Porównanie z innymi algorytmami sortującymi}
 \section{Bibliografia}
 \end{document}

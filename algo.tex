@@ -39,12 +39,13 @@
 \hspace{10pt} W przypadku rozważania efektywności algorytmu quicksort bierzemy pod uwagę przede wszystkim dwa przypadki: najlepszy i średni, więc to właśnie na nich skupimy swoje rozważania, można jednak wysnuć intuicje dotyczące przypadku najgorszego (który opiszemy pobieżnie).\\
 \\
 Wśród zalet algorytmu sortowania szybkiego możemy z pewnością wymienić działanie w miejscu, bardzo efektywny czas działania w średnim przypadku, oraz to, że działa nawet w środowiskach wykorzystujących pamięć wirtualną.
+\chapter{Działanie algorytmu}
 \section{Ogólny opis działania}
 Algorytm jest oparty na technice "dziel i zwyciężaj", którą możemy podzielić na 3 kroki:
 \begin{enumerate}
 \item \textbf{Dziel} - Tablica $A[]$ jest dzielona na dwie części, takie, że każdy element tablicy pierwszej jest nie większy niż $A[q]$, a każdy element tablicy drugiej jest większy od $A[q]$. Możemy wywnioskować że bardzo ważnym krokiem będzie wybór elementu $A[q]$.
 \item \textbf{Zwyciężaj} - Obydwie podtablice są sortowane rekurencyjnymi wywołaniami quicksort.
-\item \textbf{Połącz} - Z racji tego, że sortowanie odbywa się w miejscu nie musimy łączyć tablic, ponieważ są one już automatycznie połączone.\\
+\item \textbf{Połącz} - Z racji tego, że sortowanie odbywa się w miejscu nie musimy łączyć tablic, ponieważ są one już automatycznie połączone.
 \end{enumerate}
 \subsubsection{Zalety}
 \begin{itemize}
@@ -52,26 +53,7 @@ Algorytm jest oparty na technice "dziel i zwyciężaj", którą możemy podzieli
 \item \textbf{Szybkość średniego przypadku} - jego oczekiwany czas działania wynosi $\theta(nlgn)$, a stałe ukryte pod znakiem $\theta$ są małe.
 \item Działa dobrze w środowiskach wykorzystujących \textbf{pamięć wirtualną}
 \end{itemize}
-\section{Przypadki}
-\subsubsection{Średni przypadek}
-Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku $\theta(nlgn)$, co jest bardzo dobrym wynikiem, ze względu na powolny wzrost funkcji logarytmicznej (ryc. 1). \\
-\\
-\textit{ryc.1 - wykres dla funkcji $y=x$(czerwona), $y=x^2$(czarna - rosnąca szybciej), $y=log2(x)$(niebieska), $y=2^x$(zielona), $y=2log2(x)$(czarna - rosnąca wolniej), wygenerowany dzięki stronie: https://www.desmos.com/calculator}
-\subsubsection{Najgorszy przypadek}
-Istnieje też druga strona medalu i przypadek najgorszy $\theta(n^2)$
-
-\subsubsection{Szukanie pivota}
-Pivot możemy ustalać na różne sposoby. Najpopularniejszymi z nich jest wybór ostatniego elementu na liście, pierwszego elementu na liście, wybór elementu, który jest elementem środkowym spośród trzech (pierwszego, środkowego, ostatniego), lub możemy wybrać element losowo. Wszystkie te podejścia testujemy w naszym kodzie.
-\subsubsection{Implementacja w pseudokodzie}
-\begin{Verbatim}
-Quicksort(A, p, r):
-if p < r
-	q = partition(A, p, r)
-	quicksort(A, p, q-1)
-	quicksort(A, q+1, r)
-\end{Verbatim}
-
-
+\newpage
 \section{Podział tablicy}
 Dzięki funkcji def partition następuje podzielenie większych problemów na mniejsze. Wykorzystany zostanie pivot, czyli element który pozwoli wyznaczyć na dwa podproblmy. Elementy na lewo od pivot'a będą od niego mniejsze, zaś po jego prawej stronie, większe.
 
@@ -374,8 +356,55 @@ Pivot $p$ znajduje się we właściwym dla siebie miejscu. Ze względu na warune
 
 
 Po "sprasowaniu" wszystkich elementów \textbf{pogrubionych} otrzymamy posortowaną listę.
+\paragraph{Szukanie pivota}
+Pivot możemy ustalać na różne sposoby. Najpopularniejszymi z nich jest wybór ostatniego elementu na liście, pierwszego elementu na liście, wybór elementu, który jest elementem środkowym spośród trzech (pierwszego, środkowego, ostatniego), lub możemy wybrać element losowo. Wszystkie te podejścia testujemy w naszym kodzie.
 
-
+\section{Czas działania}
+Czas działania quicksort zależy od tego, jak równo zostaną podzielone dwie tablice. Najlepszy przypadek możemy rozważać, gdy iość elementów w tablicach za każdym razem będzie rozdzielana równomiernie, najgorszy przypadek występuje, przy najmniej zrównoważonym podziale, czyli takim, gdzie tablica A[] jest dzielona tak, że jedna jej podtablica jest pusta, a druga zawiera $n-1$ elementów z tablicy A[].
+\subsection{Najlepszy przypadek}
+Najlepszej wydajności możemy oczekwiać w momencie, gdy obydwie podtablice mają rozmiary: $A_{1}[n/2]$ elementów,  $A_{2}[n/2] - 1$, czyli mówiąc ludzkim językiem - są najbardziej równe (pod względem liczby elementów) jak to możliwe. Wtedy równanie rekurencyjne ma postać: \\
+\\
+$T(n) = 2T(n/2) + \theta(n)$\\
+\\
+co na podstawie 2 twierdzenia o rekurencji uniwersalnej, daje rozwiązanie postaci: \\
+\\
+$T(n) = \theta(n log_{2} n)$
+\subsection{Średni przypadek}
+Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku $\theta(nlgn)$, co jest bardzo dobrym wynikiem, ze względu na powolny wzrost funkcji logarytmicznej (ryc. 1). \\
+\\
+\includegraphics[scale=1]{funkcje.png}
+\textit{ryc.1 - wykres dla funkcji:
+\begin{itemize}
+\item $y=n$, 
+\item $y=2^n$, 
+\item $y=log2(x)$, 
+\item $y=2log2(x)$
+\end{itemize}}
+Dzieje się tak ze względu na to, że działanie algorytmów zależy od kolejności elementów w tablicy wejściowej, a nie od ich konkretnej wartości. W przypadku średnim, procedura tworzy mieszankę "dobrych" i "złych" podziałów.
+\subsection{Najgorszy przypadek}
+Istnieje też druga strona medalu i przypadek najgorszy. Następuje on, gdy podziały są maksymalnie niezrównoważone i za każdym razem tablica jest dzielona na dwie podtablice zawierające odpowiednio $n-1$ oraz 0 elementów. Wtedy koszt jednego podziału wynosi $\theta (n)$. Opisuje to rekurencyjne równanie: \\
+\\
+$T(n) = T(n-1) + T(0) + \theta(n) = T(n-1) + \theta(n)$, gdzie: \\
+\\
+$T(n-1)$ to czas przejścia po tablicy z $n-1$ elementami, $T(0)$ to czas przejścia po tablicy z 0 elementami, a $\theta(n)$ to koszt podziału najbardziej niezrównoważonego, wtedy: \\
+\\
+$T(n-1) + \theta(n) = \theta(n^2)$ \\
+\\
+Co daje czas działania tak wolny jak sortowanie przez wstawianie.
+\chapter{Implementacje}
+\section{Implementacja w pseudokodzie}
+\begin{Verbatim}
+Quicksort(A, p, r):
+if p < r
+	q = partition(A, p, r)
+	quicksort(A, p, q-1)
+	quicksort(A, q+1, r)
+\end{Verbatim}
+A - tablica do sortowania\\
+p - pierwszy element (zazwyczaj 1)\\
+r - długość tablicy\\
+\\
+"Jeśli długość tablicy jest większa niż indeks pierwszego elementu, to do zmiennej q zapisz wynik procedury "partition" na podanej tablicy A (czyli indeks pivota), i dokonaj podziału dwóch utworzonych podtablic metodą quicksort"  
 \section{Implementacja w Python}
 \subsection{Quicksort}
 \begin{Verbatim}
@@ -418,6 +447,7 @@ def partition_middle(lst, start, stop):
     lst[stop], lst[med] = lst[med], lst[stop]
     return partition(lst, start, stop)
 \end{Verbatim}
+\chapter{Testy i porównania}
 \section{Testy}
 \section{Porównanie z innymi algorytmami sortującymi}
 \section{Bibliografia}

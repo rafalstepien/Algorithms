@@ -39,9 +39,9 @@
 \tableofcontents
 \newpage
 \chapter{Wprowadzenie}
-\hspace{10pt} W przypadku rozważania efektywności algorytmu quicksort bierzemy pod uwagę przede wszystkim dwa przypadki: najlepszy i średni, więc to właśnie na nich skupimy swoje rozważania, można jednak wysnuć intuicje dotyczące przypadku najgorszego (który opiszemy pobieżnie).\\
+\hspace{10pt}Quicksort został wynaleziony przez brytyjskiego informatyka Tony'ego Hoare'a i jest jednym z najpopularniejszych algorytmów sortujących. Do dnia dzisiejszego powszechnie używany, jednak ze względu na rekurencyjne działanie, trzeba uważać przy jego stosowaniu i nie można go implementować bezmyślnie, bo może prowadzić to do przepełnienia stosu rekurencji i zablokowania komputera, lub spadku wydajności, jeżeli zapominamy o najgorszym przypadku i w efekcie algorytm nie jest już taki dobry. \\
 \\
-Wśród zalet algorytmu sortowania szybkiego możemy z pewnością wymienić działanie w miejscu, bardzo efektywny czas działania w średnim przypadku, oraz to, że działa nawet w środowiskach wykorzystujących pamięć wirtualną.
+W przypadku rozważania efektywności algorytmu quicksort bierzemy pod uwagę przede wszystkim dwa przypadki: najlepszy i średni, można jednak wysnuć intuicje dotyczące przypadku najgorszego.
 \chapter{Działanie algorytmu}
 \section{Ogólny opis działania}
 Algorytm jest oparty na technice "dziel i zwyciężaj", którą możemy podzielić na 3 kroki:
@@ -365,7 +365,7 @@ Pivot możemy ustalać na różne sposoby. Najpopularniejszymi z nich jest wybó
 \section{Czas działania}
 Czas działania quicksort zależy od tego, jak równo zostaną podzielone dwie tablice. Najlepszy przypadek możemy rozważać, gdy iość elementów w tablicach za każdym razem będzie rozdzielana równomiernie, najgorszy przypadek występuje, przy najmniej zrównoważonym podziale, czyli takim, gdzie tablica A[] jest dzielona tak, że jedna jej podtablica jest pusta, a druga zawiera $n-1$ elementów z tablicy A[].
 \subsection{Najlepszy przypadek}
-Najlepszej wydajności możemy oczekwiać w momencie, gdy obydwie podtablice mają rozmiary: $A_{1}[n/2]$ elementów,  $A_{2}[n/2] - 1$, czyli mówiąc ludzkim językiem - są najbardziej równe (pod względem liczby elementów) jak to możliwe. Wtedy równanie rekurencyjne ma postać: \\
+Najlepszej wydajności możemy oczekwiać w momencie, gdy obydwie podtablice mają rozmiary: $A_{1}[n/2]$ elementów,  $A_{2}[n/2] - 1$, czyli mówiąc ludzkim językiem - są najbardziej równe (pod względem liczby elementów) jak to możliwe, przy każdym podziale. Wtedy równanie rekurencyjne ma postać: \\
 \\
 $T(n) = 2T(n/2) + \theta(n)$\\
 \\
@@ -417,6 +417,14 @@ def quick_sort(lst, start, stop, fun):
         quick_sort(lst, start, border - 1, fun)
         quick_sort(lst, border + 1, stop, fun)
 \end{Verbatim}
+Definiujemy funkcję quicksort, przyjmującą parametry:
+\begin{itemize}
+\item lst - lista, którą będziemy sortować
+\item start - punkt początkowy (start iteracji)
+\item stop - punkt końcowy (koniec iteracji)
+\item fun - funkcja wyboru pivota (wybierana spośród czterech: element pierwszy z lewej, ostatni z lewej, losowy, lub o środkowej wartości spośród elementów o indeksie pierwszym, środkowym i ostatnim)
+\end{itemize}
+Blok "if" warunkuje, że ostatni element na liście ma większy indeks niż element pierwszy. Po spełnieniu tego warunku do zmiennej "border" zapisujemy wartość, którą zwraca nam funkcja wyboru pivota działająca na parametrach: lista, start, stop; tak więc zostaje zwrócony indeks pivota, po czym przystępujemy do podziału tablicy na dwie podtablice, każda jest sortowana osobnym, rekurencyjnym wywołaniem quicksort.
 \subsection{Partition}
 \begin{Verbatim}
 def partition(lst, start, stop):
@@ -435,21 +443,28 @@ def partition(lst, start, stop):
 def partition_last(lst, start, stop):
     lst[stop], lst[stop] = lst[stop], lst[stop]
     return partition(lst, start, stop)
-
+\end{Verbatim}
+\textbf{Partition last} - pivot wybierany jako ostatni element listy.
+\begin{Verbatim}
 def partition_rand(lst, start, stop):
     rand_pivot = random.randint(start, stop)
     lst[stop], lst[rand_pivot] = lst[rand_pivot], lst[stop]
     return partition(lst, start, stop)
-
+\end{Verbatim}
+\textbf{Partition rand} - pivot wybierany jako losowy element listy.
+\begin{Verbatim}
 def partition_first(lst, start, stop):
     lst[stop], lst[start] = lst[start], lst[stop]
     return partition(lst, start, stop)
-
+\end{Verbatim}
+\textbf{Partition last} - pivot wybierany jako pierwszy element listy.
+\begin{Verbatim}
 def partition_middle(lst, start, stop):
     med = (len(lst)) // 2
     lst[stop], lst[med] = lst[med], lst[stop]
     return partition(lst, start, stop)
 \end{Verbatim}
+\textbf{Partition last} - pivot wybierany jako środkowy element listy.
 \chapter{Testy i porównania}
 \section{Testy}
 

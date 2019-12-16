@@ -56,7 +56,7 @@ Algorytm jest oparty na technice "dziel i zwyciężaj", którą możemy podzieli
 \item \textbf{Szybkość średniego przypadku} - jego oczekiwany czas działania wynosi $\theta(nlgn)$, a stałe ukryte pod znakiem $\theta$ są małe.
 \item Działa dobrze w środowiskach wykorzystujących \textbf{pamięć wirtualną}
 \end{itemize}
-\newpage
+
 \section{Podział tablicy}
 Dzięki funkcji def partition następuje podzielenie większych problemów na mniejsze. Wykorzystany zostanie pivot, czyli element który pozwoli wyznaczyć na dwa podproblmy. Elementy na lewo od pivot'a będą od niego mniejsze, zaś po jego prawej stronie, większe.
 
@@ -69,6 +69,8 @@ w którego miejsce wstawiane będą elementy $i$-te. Ostatecznie border wyznacza
 
 
 Procedurę zaczynamy zawsze od początku do końca wyznaczonego zbioru. Element $i$-ty zostaje zamieniony z $j$-tym w momencie, gdy i$<$p. Zbiór analizowany jest element po elemencie. Gdy następuje zamiana, element $j$ zostaje przesunięty $+1$. Komórki zaznaczone na szaro to elementy ulegające zamianie w danej iteracji.
+
+\newpage
 \begin{table}[h!]
 \Large
 \centering
@@ -372,17 +374,32 @@ $T(n) = 2T(n/2) + \theta(n)$\\
 co na podstawie 2 twierdzenia o rekurencji uniwersalnej, daje rozwiązanie postaci: \\
 \\
 $T(n) = \theta(n log_{2} n)$
+
 \subsection{Średni przypadek}
 Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku $\theta(nlgn)$, co jest bardzo dobrym wynikiem, ze względu na powolny wzrost funkcji logarytmicznej (ryc. 1). \\
 \\
-\includegraphics[scale=1]{funkcje.png}
-\textit{ryc.1 - wykres dla funkcji:
-\begin{itemize}
-\item $y=n$, 
-\item $y=2^n$, 
-\item $y=log2(x)$, 
-\item $y=2log2(x)$
-\end{itemize}}
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=1.5, transform shape]
+\begin{axis}[grid=both,
+      mark = none,
+      xmin = 0, ymin = 0,
+      xmax = 16,ymax = 16,
+      axis lines*=middle,
+      enlargelimits=upper,
+      clip=false,
+      xtick={0,2,...,16},
+      ytick={0,2,...,16}]
+\addplot[red, domain=0:5,restrict y to domain=0:18, samples=100]  {pow(2,x)} node[right,anchor=north west]{$y=2^n$};
+\addplot[blue, domain=0:18,restrict y to domain=0:18, samples=100]  {x} node[anchor=north east,inner xsep=3ex] {$y=n$};
+\addplot[green, domain=0:18,restrict y to domain=0:18, samples=100]  {ln(x)/ln(2)} node[right,anchor=north west]{$log_2x$};
+\addplot[yellow, domain=0:18,restrict y to domain=0:18, samples=100]  {2*(ln(x)/ln(2))} node[right,anchor=north west]{$2log_2x$};
+\end{axis}
+\end{tikzpicture}
+\caption{Wykres dla funkcji: $y=n$, $y=2^n$, $y=log2(x)$, $y=2log2(x)$}
+\end{figure}
+
 Dzieje się tak ze względu na to, że działanie algorytmów zależy od kolejności elementów w tablicy wejściowej, a nie od ich konkretnej wartości. W przypadku średnim, procedura tworzy mieszankę "dobrych" i "złych" podziałów.
 \subsection{Najgorszy przypadek}
 Istnieje też druga strona medalu i przypadek najgorszy. Następuje on, gdy podziały są maksymalnie niezrównoważone i za każdym razem tablica jest dzielona na dwie podtablice zawierające odpowiednio $n-1$ oraz 0 elementów. Wtedy koszt jednego podziału wynosi $\theta (n)$. Opisuje to rekurencyjne równanie: \\
@@ -468,24 +485,7 @@ def partition_middle(lst, start, stop):
 \chapter{Testy i porównania}
 \section{Testy}
 
-\begin{center}
-\begin{tikzpicture}[scale=1.5, transform shape]
-\begin{axis}[grid=both,
-      mark = none,
-      xmin = 0, ymin = 0,
-      xmax = 16,ymax = 16,
-      axis lines*=middle,
-      enlargelimits=upper,
-      clip=false,
-      xtick={0,2,...,16},
-      ytick={0,2,...,16}]
-\addplot[red, domain=0:5,restrict y to domain=0:18, samples=100]  {pow(2,x)} node[right,anchor=north west]{$y=2^n$};
-\addplot[blue, domain=0:18,restrict y to domain=0:18, samples=100]  {x} node[anchor=north east,inner xsep=3ex] {$y=n$};
-\addplot[green, domain=0:18,restrict y to domain=0:18, samples=100]  {ln(x)/ln(2)} node[right,anchor=north west]{$log_2x$};
-\addplot[yellow, domain=0:18,restrict y to domain=0:18, samples=100]  {2*(ln(x)/ln(2))} node[right,anchor=north west]{$2log_2x$};
-\end{axis}
-\end{tikzpicture}
-\end{center}
+
 \section{Porównanie z innymi algorytmami sortującymi}
 \section{Bibliografia}
 \end{document}

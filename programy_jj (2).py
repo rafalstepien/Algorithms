@@ -21,20 +21,16 @@ def is_ord(x):
 
 if __name__ == '__main__':
 
-  pivoty = (sorty.qs_l, sorty.qs_m, sorty.qs_l, sorty.qs_r, sorty.quick_sort_h, sorty.insertion_sort_l, sorty.insertion_sort_t, sorty.selection_sort)
+  pivoty = (sorty.qs_l, sorty.qs_m, sorty.qs_l, sorty.qs_r)
   nazwy = ('quick (first)    ', 
            'quick (middle)   ', 
            'quick (last)     ', 
            'quick (random)   ', 
-           'quick (Hoare)    ', 
-           'insertion (list) ', 
-           'insertion (table)', 
-           'selection        ',
           )
   style ='+x*v<>^o'
   sizes = [ ]
   cases = [ ]
-  results = [[ ], [ ], [ ], [ ], [ ], [ ], [ ], [ ]]
+  results = [[ ], [ ], [ ], [ ]]
 
   nn = 20
   for i in range(nn):

@@ -38,20 +38,20 @@
 \end{titlepage}
 \newpage
 \tableofcontents
-\newpage
-\chapter{Wprowadzenie}
-\hspace{10pt}Quicksort został wynaleziony przez brytyjskiego informatyka Tony'ego Hoare'a i jest jednym z najpopularniejszych algorytmów sortujących. Do dnia dzisiejszego powszechnie używany, jednak ze względu na rekurencyjne działanie, trzeba uważać przy jego stosowaniu i nie można go implementować bezmyślnie, bo może prowadzić to do przepełnienia stosu rekurencji i zablokowania komputera, lub spadku wydajności, jeżeli zapominamy o najgorszym przypadku i w efekcie algorytm nie jest już taki dobry. \\
-\\
+\begin{abstract}
+Quicksort został wynaleziony przez brytyjskiego informatyka Tony'ego Hoare'a i jest jednym z najpopularniejszych algorytmów sortujących. Do dnia dzisiejszego powszechnie używany, jednak ze względu na rekurencyjne działanie, trzeba uważać przy jego stosowaniu i nie można go implementować bezmyślnie, bo może prowadzić to do przepełnienia stosu rekurencji i zablokowania komputera, lub spadku wydajności, jeżeli zapominamy o najgorszym przypadku i w efekcie algorytm nie jest już taki dobry.\\
 W przypadku rozważania efektywności algorytmu quicksort bierzemy pod uwagę przede wszystkim dwa przypadki: najlepszy i średni, można jednak wysnuć intuicje dotyczące przypadku najgorszego.
-\chapter{Działanie algorytmu}
-\section{Ogólny opis działania}
+\end{abstract}
+
+\chapter{Quicksort}
+\section{Zasada działania}
 Algorytm jest oparty na technice "dziel i zwyciężaj", którą możemy podzielić na 3 kroki:
 \begin{enumerate}
 \item \textbf{Dziel} - Tablica $A[]$ jest dzielona na dwie części, takie, że każdy element tablicy pierwszej jest nie większy niż $A[q]$, a każdy element tablicy drugiej jest większy od $A[q]$. Możemy wywnioskować że bardzo ważnym krokiem będzie wybór elementu $A[q]$.
 \item \textbf{Zwyciężaj} - Obydwie podtablice są sortowane rekurencyjnymi wywołaniami quicksort.
 \item \textbf{Połącz} - Z racji tego, że sortowanie odbywa się w miejscu nie musimy łączyć tablic, ponieważ są one już automatycznie połączone.
 \end{enumerate}
-\subsubsection{Zalety}
+\subsection*{Właściwości algorytmu}
 \begin{itemize}
 \item \textbf{Sortowanie w miejscu} - zaletą takiego działania jest to, że nie zużywamy dodatkowej pamięci, ponieważ operacje są wykonywane za każdym razem na tej samej liście, nie tworzymy nowej.
 \item \textbf{Szybkość średniego przypadku} - jego oczekiwany czas działania wynosi $\theta(nlgn)$, a stałe ukryte pod znakiem $\theta$ są małe.
@@ -512,4 +512,9 @@ Co daje czas działania tak wolny jak sortowanie przez wstawianie.
 
 \section{Porównanie z innymi algorytmami sortującymi}
 \section{Bibliografia}
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{refer.bib}
+
 \end{document}

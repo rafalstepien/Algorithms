@@ -8,6 +8,7 @@
 \usepackage{indentfirst}
 \usepackage{arydshln}
 \usepackage{tikz}
+\usepackage{amsmath}
 \usepackage{pgfplots}
 \pgfplotsset{every tick label/.append style={font=\footnotesize}}
 \title{Quicksort}
@@ -359,90 +360,9 @@ Pivot $p$ znajduje się we właściwym dla siebie miejscu. Ze względu na warune
 
 
 Po "sprasowaniu" wszystkich elementów \textbf{pogrubionych} otrzymamy posortowaną listę.
-\paragraph{Szukanie pivota}
-Pivot możemy ustalać na różne sposoby. Najpopularniejszymi z nich jest wybór ostatniego elementu na liście, pierwszego elementu na liście, wybór elementu, który jest elementem środkowym spośród trzech (pierwszego, środkowego, ostatniego), lub możemy wybrać element losowo. Wszystkie te podejścia testujemy w naszym kodzie.
 
-\section{Czas działania}
-Czas działania quicksort zależy od tego, jak równo zostaną podzielone dwie tablice. Najlepszy przypadek możemy rozważać, gdy iość elementów w tablicach za każdym razem będzie rozdzielana równomiernie, najgorszy przypadek występuje, przy najmniej zrównoważonym podziale, czyli takim, gdzie tablica A[] jest dzielona tak, że jedna jej podtablica jest pusta, a druga zawiera $n-1$ elementów z tablicy A[].
-\subsection{Najlepszy przypadek}
-Najlepszej wydajności możemy oczekwiać w momencie, gdy obydwie podtablice mają rozmiary: $A_{1}[n/2]$ elementów,  $A_{2}[n/2] - 1$, czyli mówiąc ludzkim językiem - są najbardziej równe (pod względem liczby elementów) jak to możliwe, przy każdym podziale. Wtedy równanie rekurencyjne ma postać: \\
-\\
-$T(n) = 2T(n/2) + \theta(n)$\\
-\\
-co na podstawie 2 twierdzenia o rekurencji uniwersalnej, daje rozwiązanie postaci: \\
-\\
-$T(n) = \theta(n log_{2} n)$
-\subsection{Średni przypadek}
-Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku $\theta(nlgn)$, co jest bardzo dobrym wynikiem, ze względu na powolny wzrost funkcji logarytmicznej (ryc. 1). \\
-\\
-\begin{center}
-\begin{tikzpicture}[scale=1.5, transform shape]
-\begin{axis}[grid=both,
-      mark = none,
-      xmin = 0, ymin = 0,
-      xmax = 16,ymax = 16,
-      axis lines*=middle,
-      enlargelimits=upper,
-      clip=false,
-      xtick={0,2,...,16},
-      ytick={0,2,...,16}]
-\addplot[red, domain=0:5,restrict y to domain=0:18, samples=100]  {pow(2,x)} node[right,anchor=north west]{$y=2^n$};
-\addplot[blue, domain=0:18,restrict y to domain=0:18, samples=100]  {x} node[anchor=north east,inner xsep=3ex] {$y=n$};
-\addplot[green, domain=0:18,restrict y to domain=0:18, samples=100]  {ln(x)/ln(2)} node[right,anchor=north west]{$log_2x$};
-\addplot[yellow, domain=0:18,restrict y to domain=0:18, samples=100]  {2*(ln(x)/ln(2))} node[right,anchor=north west]{$2log_2x$};
-\end{axis}
-\end{tikzpicture}
-\end{center}
-\textit{ryc.1 - wykres dla funkcji:
-\begin{itemize}
-\item $y=n$, 
-\item $y=2^n$, 
-\item $y=log2(x)$, 
-\item $y=2log2(x)$
-\end{itemize}}
-Dzieje się tak ze względu na to, że działanie algorytmów zależy od kolejności elementów w tablicy wejściowej, a nie od ich konkretnej wartości. W przypadku średnim, procedura tworzy mieszankę "dobrych" i "złych" podziałów.
-\subsection{Najgorszy przypadek}
-Istnieje też druga strona medalu i przypadek najgorszy. Następuje on, gdy podziały są maksymalnie niezrównoważone i za każdym razem tablica jest dzielona na dwie podtablice zawierające odpowiednio $n-1$ oraz 0 elementów. Wtedy koszt jednego podziału wynosi $\theta (n)$. Opisuje to rekurencyjne równanie: \\
-\\
-$T(n) = T(n-1) + T(0) + \theta(n) = T(n-1) + \theta(n)$, gdzie: \\
-\\
-$T(n-1)$ to czas przejścia po tablicy z $n-1$ elementami, $T(0)$ to czas przejścia po tablicy z 0 elementami, a $\theta(n)$ to koszt podziału najbardziej niezrównoważonego, wtedy: \\
-\\
-$T(n-1) + \theta(n) = \theta(n^2)$ \\
-\\
-Co daje czas działania tak wolny jak sortowanie przez wstawianie.
-\chapter{Implementacje}
-\section{Implementacja w pseudokodzie}
-\begin{Verbatim}
-Quicksort(A, p, r):
-if p < r
-	q = partition(A, p, r)
-	quicksort(A, p, q-1)
-	quicksort(A, q+1, r)
-\end{Verbatim}
-A - tablica do sortowania\\
-p - pierwszy element (zazwyczaj 1)\\
-r - długość tablicy\\
-\\
-"Jeśli długość tablicy jest większa niż indeks pierwszego elementu, to do zmiennej q zapisz wynik procedury "partition" na podanej tablicy A (czyli indeks pivota), i dokonaj podziału dwóch utworzonych podtablic metodą quicksort"  
-\section{Implementacja w Python}
-\subsection{Quicksort}
-\begin{Verbatim}
-def quick_sort(lst, start, stop, fun):
-    if start < stop:
-        border = fun(lst, start, stop)
-        quick_sort(lst, start, border - 1, fun)
-        quick_sort(lst, border + 1, stop, fun)
-\end{Verbatim}
-Definiujemy funkcję quicksort, przyjmującą parametry:
-\begin{itemize}
-\item lst - lista, którą będziemy sortować
-\item start - punkt początkowy (start iteracji)
-\item stop - punkt końcowy (koniec iteracji)
-\item fun - funkcja wyboru pivota (wybierana spośród czterech: element pierwszy z lewej, ostatni z lewej, losowy, lub o środkowej wartości spośród elementów o indeksie pierwszym, środkowym i ostatnim)
-\end{itemize}
-Blok "if" warunkuje, że ostatni element na liście ma większy indeks niż element pierwszy. Po spełnieniu tego warunku do zmiennej "border" zapisujemy wartość, którą zwraca nam funkcja wyboru pivota działająca na parametrach: lista, start, stop; tak więc zostaje zwrócony indeks pivota, po czym przystępujemy do podziału tablicy na dwie podtablice, każda jest sortowana osobnym, rekurencyjnym wywołaniem quicksort.
-\subsection{Partition}
+\subsection{Implementacja w Python}
+
 \begin{Verbatim}
 def partition(lst, start, stop):
     pivot_index = stop
@@ -454,35 +374,135 @@ def partition(lst, start, stop):
     lst[stop], lst[start] = lst[start], lst[stop]
     return start
 \end{Verbatim}
-\newpage
-\subsection{Funkcje wyboru pivota}
-\begin{Verbatim}
+
+
+\section{Wybór pivot'a}
+Pivot można ustalać na 4 różne sposoby. Są to kolejno:
+\begin{itemize}
+\item ostatni element na analizowanej liście,
+\item pierwszy element na analizowanej liście, 
+\item element o środkowym indeksie
+\item element losowo wybrany z analizowanej listy
+\end{itemize} 
+Wszystkie te podejścia testujemy w naszym kodzie.
+
+\subsection{Implementacja w Python}
+
+\begin{verbatim}
 def partition_last(lst, start, stop):
     lst[stop], lst[stop] = lst[stop], lst[stop]
     return partition(lst, start, stop)
-\end{Verbatim}
-\textbf{Partition last} - pivot wybierany jako ostatni element listy.
-\begin{Verbatim}
+\end{verbatim}
+\textbf{Partition last} - pivot wybierany jako ostatni element z analizowanej listy.
+
+\begin{verbatim}
 def partition_rand(lst, start, stop):
     rand_pivot = random.randint(start, stop)
     lst[stop], lst[rand_pivot] = lst[rand_pivot], lst[stop]
     return partition(lst, start, stop)
-\end{Verbatim}
-\textbf{Partition rand} - pivot wybierany jako losowy element listy.
-\begin{Verbatim}
+\end{verbatim}
+\textbf{Partition rand} - pivot wybierany jako losowy element z analizowanej listy.
+
+\begin{verbatim}
 def partition_first(lst, start, stop):
     lst[stop], lst[start] = lst[start], lst[stop]
     return partition(lst, start, stop)
-\end{Verbatim}
-\textbf{Partition last} - pivot wybierany jako pierwszy element listy.
-\begin{Verbatim}
+\end{verbatim}
+\textbf{Partition last} - pivot wybierany jako pierwszy element z analizowanej listy.
+
+\begin{verbatim}
 def partition_middle(lst, start, stop):
     med = (len(lst)) // 2
     lst[stop], lst[med] = lst[med], lst[stop]
     return partition(lst, start, stop)
-\end{Verbatim}
-\textbf{Partition last} - pivot wybierany jako środkowy element listy.
-\chapter{Testy i porównania}
+\end{verbatim}
+\textbf{Partition last} - pivot wybierany jako środkowy element z analizowanej listy.
+
+\section{Funkcja właściwa \textit{Quicksort}}
+
+Jeśli długość tablicy jest większa niż indeks pierwszego elementu, to do zmiennej q zapisz wynik procedury "partition" na podanej tablicy A (czyli indeks pivota), i dokonaj podziału dwóch utworzonych podtablic metodą quicksort: 
+
+\begin{verbatim}
+def quick_sort(lst, start, stop, fun):
+    if start < stop:
+        border = fun(lst, start, stop)
+        quick_sort(lst, start, border - 1, fun)
+        quick_sort(lst, border + 1, stop, fun)
+\end{verbatim}
+
+Definiujemy funkcję quicksort, przyjmującą parametry:
+
+\begin{itemize}
+\item \textit{lst} - lista, przekazana do sortowania
+\item \textit{start} - punkt początkowy (start iteracji)
+\item \textit{stop} - punkt końcowy (koniec iteracji)
+\item \textit{fun} - funkcja wyboru pivot'a (wybierana spośród czterech: element pierwszy, ostatni, losowy, lub o środkowym indeksie z analizowanego podzbioru.
+\end{itemize}
+
+Blok \textit{if} warunkuje, że ostatni element na liście ma większy indeks niż element pierwszy. Po spełnieniu tego warunku do zmiennej \textit{border} zapisano wartość, którą zwraca nam funkcja wyboru pivota \textit{partition} działająca na parametrach: \textit{lista}, \textit{start}, \textit{stop}; tak więc zostaje zwrócony indeks pivot'a, po czym przystępujemy do podziału tablicy na dwie podtablice, każda jest sortowana osobnym, rekurencyjnym wywołaniem quicksort.
+
+
+
+\chapter{Czas działania i testy}
+Czas działania \textit{quicksort} zależy od tego, jak równo zostaje podzielona tablica. Najlepszy przypadek można rozważać, gdy ilość elementów w tablicach za każdym razem będzie dzielona równomiernie. 
+Najgorszy przypadek występuje przy najmniej zrównoważonym podziale, czyli takim, gdzie tablica A[] jest dzielona w taki sposób ,że jedna jej podtablica jest pusta, a druga zawiera $n-1$ elementów z tablicy A[].
+
+\section{Najlepszy przypadek}
+Najlepszej wydajności możemy się spodziewać w momencie, gdy obydwie podtablice mają rozmiary: $A_{1}[n/2]$ elementów,  $A_{2}[n/2] - 1$, czyli są  równe pod względem liczby elementów przy każdym podziale. Wtedy równanie rekurencyjne ma postać: \\
+
+\begin{equation*}
+T(n) = 2T(n/2) + \theta(n)
+\end{equation*}
+
+co na podstawie 2 twierdzenia o rekurencji uniwersalnej, daje rozwiązanie postaci: 
+\begin{equation*}
+T(n) = \theta(n log_{2} n)
+\end{equation*}
+
+\section{Średni przypadek}
+Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku $\theta(nlgn)$, co jest bardzo dobrym wynikiem, ze względu na powolny wzrost funkcji logarytmicznej (ryc. 1).
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=1, transform shape]
+\begin{axis}[grid=both,
+      mark = none,
+      xmin = 0, ymin = 0,
+      xmax = 16,ymax = 16,
+      axis lines*=middle,
+      enlargelimits=upper,
+      clip=false,
+      xtick={0,2,...,16},
+      ytick={0,2,...,16}]
+\addplot[red, domain=0:5,restrict y to domain=0:18, samples=100]  {pow(2,x)} node[right,anchor=north west]{$y=2^n$};
+\addplot[blue, domain=0:18,restrict y to domain=0:18, samples=100]  {x} node[anchor=north east,inner xsep=3ex] {$y=x$};
+\addplot[green, domain=0:18,restrict y to domain=0:18, samples=100]  {ln(x)/ln(2)} node[right,anchor=north west]{$log_2x$};
+\addplot[yellow, domain=0:18,restrict y to domain=0:18, samples=100]  {2*(ln(x)/ln(2))} node[right,anchor=north west]{$2log_2x$};
+\end{axis}
+\end{tikzpicture}
+\caption{wykres dla funkcji: $y=n$, $y=2^n$, $y=log2(x)$, $y=2log2(x)$}
+\end{figure}
+
+Dzieje się tak ze względu na to, że działanie algorytmów zależy od kolejności elementów w tablicy wejściowej, a nie od ich konkretnej wartości. W przypadku średnim, procedura tworzy mieszankę "dobrych" i "złych" podziałów.
+
+\section{Najgorszy przypadek}
+Istnieje też druga strona medalu i przypadek najgorszy. Następuje on, gdy podziały są maksymalnie niezrównoważone i za każdym razem tablica jest dzielona na dwie podtablice zawierające odpowiednio $n-1$ oraz 0 elementów. Wtedy koszt jednego podziału wynosi $\theta (n)$. Opisuje to rekurencyjne równanie:
+\begin{equation*}
+T(n) = T(n-1) + T(0) + \theta(n) = T(n-1) + \theta(n)
+\end{equation*}
+
+gdzie:
+
+\begin{equation*}
+T(n-1)
+\end{equation*}
+
+to czas przejścia po tablicy z $n-1$ elementami, $T(0)$ to czas przejścia po tablicy z 0 elementami, a $\theta(n)$ to koszt podziału najbardziej niezrównoważonego, wtedy:
+\begin{equation*}
+T(n-1) + \theta(n) = \theta(n^2)
+\end{equation*}
+Co daje czas działania tak wolny jak sortowanie przez wstawianie.
+
 \section{Testy}
 \subsection{Zależność czasu od długości listy wsadowej}
 \begin{flushleft}

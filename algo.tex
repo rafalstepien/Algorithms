@@ -62,7 +62,7 @@ Algorytm jest oparty na technice "dziel i zwyciężaj", którą możemy podzieli
 Dzięki funkcji def partition następuje podzielenie większych problemów na mniejsze. Wykorzystany zostanie pivot, czyli element który pozwoli wyznaczyć na dwa podproblmy. Elementy na lewo od pivot'a będą od niego mniejsze, zaś po jego prawej stronie, większe.
 
 
-Procedurę zaczęto od wybrania wartości p, która ma być pivotem wg. jednej z 4 funkcji (wartość ze zbioru znajdująca się na: końcu, początku, w miejscu środkowym lub z losowego miejsca), względem której będzie dokonywany podział. Indeksem pivota zawsze zostaje miejsce będące ostatnią pozycją analizowanego przedziału.
+Procedurę zaczęto od wybrania wartości \textit{p}, która ma być pivotem wg. jednej z 4 funkcji (wartość ze zbioru znajdująca się na: końcu, początku, w miejscu środkowym lub z losowego miejsca), względem której będzie dokonywany podział. Indeksem pivota zawsze zostaje miejsce będące ostatnią pozycją analizowanego przedziału.
 
 
 Element $i$-ty to element obecnie poddawany analizie w ciele pętli. natomiast element $j$-ty jest to tzw. border 
@@ -363,7 +363,7 @@ Po "sprasowaniu" wszystkich elementów \textbf{pogrubionych} otrzymamy posortowa
 
 \subsection{Implementacja w Python}
 
-\begin{Verbatim}
+\begin{verbatim}
 def partition(lst, start, stop):
     pivot_index = stop
     pivot_value = lst[pivot_index]
@@ -373,7 +373,7 @@ def partition(lst, start, stop):
             start += 1
     lst[stop], lst[start] = lst[start], lst[stop]
     return start
-\end{Verbatim}
+\end{verbatim}
 
 
 \section{Wybór pivot'a}
@@ -445,10 +445,10 @@ Blok \textit{if} warunkuje, że ostatni element na liście ma większy indeks ni
 
 \chapter{Czas działania i testy}
 Czas działania \textit{quicksort} zależy od tego, jak równo zostaje podzielona tablica. Najlepszy przypadek można rozważać, gdy ilość elementów w tablicach za każdym razem będzie dzielona równomiernie. 
-Najgorszy przypadek występuje przy najmniej zrównoważonym podziale, czyli takim, gdzie tablica A[] jest dzielona w taki sposób ,że jedna jej podtablica jest pusta, a druga zawiera $n-1$ elementów z tablicy A[].
+Najgorszy przypadek występuje przy najmniej zrównoważonym podziale, czyli takim, gdzie tablica A[] jest dzielona w taki sposób ,że jedna jej podtablica jest pusta, a druga zawiera $n-1$ elementów z tablicy A[], gdzie \textit{n} to długość listy.
 
 \section{Najlepszy przypadek}
-Najlepszej wydajności możemy się spodziewać w momencie, gdy obydwie podtablice mają rozmiary: $A_{1}[n/2]$ elementów,  $A_{2}[n/2] - 1$, czyli są  równe pod względem liczby elementów przy każdym podziale. Wtedy równanie rekurencyjne ma postać: \\
+Najlepszej wydajności możemy się spodziewać w momencie, gdy obydwie podtablice mają rozmiary: $A_{1}[n/2]$ elementów,  $A_{2}[n/2] - 1$, czyli są  równe pod względem liczby elementów przy każdym podziale. Wtedy równanie rekurencyjne ma postać:
 
 \begin{equation*}
 T(n) = 2T(n/2) + \theta(n)
@@ -507,9 +507,10 @@ Co daje czas działania tak wolny jak sortowanie przez wstawianie.
 
 \section{Testy}
 \subsection{Zależność czasu od długości listy wsadowej}
-\begin{flushleft}
-\includegraphics[scale=0.5]{data_length.png}
-\end{flushleft}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{Figure_1.pdf}
+\end{figure}
 
 
 \section{Porównanie z innymi algorytmami sortującymi}

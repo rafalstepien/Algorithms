@@ -466,6 +466,8 @@ Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku
 \centering
 \begin{tikzpicture}[scale=1, transform shape]
 \begin{axis}[grid=both,
+	  xlabel=$n$,
+      ylabel=$y$,
       mark = none,
       xmin = 0, ymin = 0,
       xmax = 16,ymax = 16,
@@ -475,12 +477,12 @@ Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku
       xtick={0,2,...,16},
       ytick={0,2,...,16}]
 \addplot[red, domain=0:5,restrict y to domain=0:18, samples=100]  {pow(2,x)} node[right,anchor=north west]{$y=2^n$};
-\addplot[blue, domain=0:18,restrict y to domain=0:18, samples=100]  {x} node[anchor=north east,inner xsep=3ex] {$y=x$};
-\addplot[green, domain=0:18,restrict y to domain=0:18, samples=100]  {ln(x)/ln(2)} node[right,anchor=north west]{$log_2x$};
-\addplot[yellow, domain=0:18,restrict y to domain=0:18, samples=100]  {2*(ln(x)/ln(2))} node[right,anchor=north west]{$2log_2x$};
+\addplot[blue, domain=0:18,restrict y to domain=0:18, samples=100]  {x} node[anchor=north east,inner xsep=3ex] {$y=n$};
+\addplot[green, domain=0:18,restrict y to domain=0:18, samples=100]  {ln(x)/ln(2)} node[right,anchor=north west]{$log_2n$};
+\addplot[yellow, domain=0:18,restrict y to domain=0:18, samples=100]  {2*(ln(x)/ln(2))} node[right,anchor=north west]{$2log_2n$};
 \end{axis}
 \end{tikzpicture}
-\caption{wykres dla funkcji: $y=n$, $y=2^n$, $y=log2(x)$, $y=2log2(x)$}
+\caption{wykres dla funkcji: $y=n$, $y=2^n$, $y=log_2n$, $y=2log_2n$}
 \end{figure}
 
 Dzieje się tak ze względu na to, że działanie algorytmów zależy od kolejności elementów w tablicy wejściowej, a nie od ich konkretnej wartości. W przypadku średnim, procedura tworzy mieszankę "dobrych" i "złych" podziałów.

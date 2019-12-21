@@ -32,7 +32,7 @@ if __name__ == '__main__':
   cases = [ ]
   results = [[ ], [ ], [ ], [ ]]
 
-  nn = 20
+  nn = 100
   for i in range(nn):
 
     n = random.randint(10, 10000)
@@ -51,7 +51,6 @@ if __name__ == '__main__':
         assert is_ord(list1)
         print("{}\t{}\t{}\t{}".format(n, nazwa, t, ''))
         res.append(t)
-
 fig = pyplot.figure()
 ax = fig.add_subplot(111)
 fig.suptitle('Performance of sorting algorithms')

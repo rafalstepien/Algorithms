@@ -510,31 +510,37 @@ Co daje czas działania tak wolny jak sortowanie przez wstawianie.
 
 \section{Testy}
 \subsection{Zależność czasu od długości listy wsadowej}
-Pierwszym testem jest porównanie szybkości działania algorytmu w zależności od długości listy. Testowi poddawane są wszystkie cztery funkcje wyboru pivota, każda funkcja w jednej iteracji otrzymuje identyczną listę określonej długości, co pozwoli na otrzymanie wiarygodnego i zdatnego do porównania wyniku. Ryc. 2 przedstawia wykres zależności czasu od długości listy wsadowej.
+Pierwszym testem jest porównanie szybkości działania algorytmu w zależności od długości listy. Testowi poddawane są wszystkie cztery funkcje wyboru \textit{pivota}, każda funkcja w jednej iteracji otrzymuje identyczną listę określonej długości, co pozwoli na otrzymanie wiarygodnego i zdatnego do porównania wyniku:
+
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{Figure_1.pdf}
+\includegraphics[scale=0.8]{Figure_1.pdf}
+\caption{Wykres zależności czasu od długości listy wsadowej}
 \end{figure}
-\textit{Ryc. 2, wykres zależności czasu od długości listy wsadowej}
-Wniosek, jest następujący: funkcja wyboru random działa najszybciej w każdym przypadku długości. Spowodowane jest to zjawiskiem losowego wyboru pivota, ponieważ daje to największą szansę wybrania wyniku będącego jak najbliższym wartości środkowej. Rozważmy przypadek, gdy do algorytmu podawana jest lista, która wygenerowana losowo jest w pewnym stopniu posortowana - wtedy żeby pivot osiągnął wartość jak najbliższą wartości mediany (ponieważ wtedy algorytm działa najszybciej), której nie znamy, najrozsądniejszym wyborem pivota będzie wybór losowy, bo wtedy szanse na wybranie każdego elementu są identyczne; w przypadku listy, która nie jest posortowana, algorytm także otrzymuje takie same szanse dla każdego elementu. W przypadku wyboru pivota ze stałego miejsca jakim jest na przykład pierwszy lub ostatni element, gdy podawana jest lista uporządkowana,  istnieje ryzyko wielokrotnego wybrania mało optymalnego elementu za każdym razem, co powoduje zmniejszenie efektywności algorytmu. Gdyby na przykład do algorytmu, który stworzył wykres, została podana za każdym razem lista tylko i wyłącznie z pierwszym i ostatnim elementem na właściwym miejscu, a funkcją wybierającą pivot byłaby "first" lub "last", wydajność algorytmu byłaby drastycznie słaba. Problem ten nie pojawi się w przypadku funkcji random.
 
 
-\subsection{Szybkość sortowania w 100 przypadkach}
+Wniosek, jest następujący: funkcja wyboru \textit{random} działa najszybciej w każdym przypadku długości. Spowodowane jest to zjawiskiem losowego wyboru pivota, ponieważ daje to największą szansę wybrania wyniku będącego jak najbliższym wartości środkowej. 
+
+
+Rozważmy przypadek, gdy do algorytmu podawana jest lista, która wygenerowana losowo jest w pewnym stopniu posortowana - wtedy żeby \textit{pivot} osiągnął wartość jak najbliższą wartości mediany (ponieważ wtedy algorytm działa najszybciej), której nie znamy, najrozsądniejszym wyborem \textit{pivot'a} będzie wybór losowy, bo wtedy szanse na wybranie każdego elementu są identyczne; w przypadku listy, która nie jest posortowana, algorytm także otrzymuje takie same szanse dla każdego elementu. W przypadku wyboru \textit{pivot'a} ze stałego miejsca jakim jest na przykład pierwszy lub ostatni element, gdy podawana jest lista uporządkowana,  istnieje ryzyko wielokrotnego wybrania mało optymalnego elementu za każdym razem, co powoduje zmniejszenie efektywności algorytmu. Gdyby na przykład do algorytmu, który stworzył wykres, została podana za każdym razem lista tylko i wyłącznie z pierwszym i ostatnim elementem na właściwym miejscu, a funkcją wybierającą \textit{pivot} byłaby "first" lub "last", wydajność algorytmu byłaby drastycznie słaba. Problem ten nie pojawi się w przypadku funkcji random.
+
+
+\subsection{Szybkość sortowania w 100 losowych przypadkach}
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=1]{Figure_2.pdf}
+\caption{Wykres zależności czasu od ilości iteracji}
 \end{figure}
-\textit{Ryc. 3, wykres zależności czasu od ilości iteracji}
-Ryc. 3 porównuje czas działania czterech sposobów wyboru pivota dla stu przypadków, w przypadku gdy lista jest losowa. Długość listy jest taka sama w każdym przypadku. Można zauważyć, że w takim wypadku losowy wybór pivota zazwyczaj charakteryzuje się najdłuższym czasem działania, ze względu na to, że jeżeli lista jest losowa, to każdy wybór pivota, czy to pierwszy, środkowy, ostatni jest losowy. Czerwone trójkąty na wykresie mają reprezentują zazwyczaj największą wartość, ponieważ randomizowanie wyboru powoduje dodatkową stratę czasu. Wśród pozostałych sposobów można wyróżnić tendencję dla zazwyczaj wyższych wynikóW przy wyborze "middle" oraz mniej więcej równomierny rozkład dla "last" i "first", co potwierdza wniosek, że przy losowej liście najbardziej optymalnym sposobem jest wybór pierwszego/ostatniego elementu jako pivota.
+
+\textit{Rys. 2.3} przedstawia czas działania czterech sposobów wyboru \textit{pivot'a} dla stu przypadków, w przypadku gdy lista jest losowa, a długość listy jest taka sama w każdym przypadku. Można zauważyć, że w takim wypadku losowy wybór \textit{pivot'a} zazwyczaj charakteryzuje się najdłuższym czasem działania. Czerwone trójkąty na wykresie mają reprezentują zazwyczaj największą wartość, ponieważ randomizowanie wyboru powoduje dodatkową stratę czasu. Wśród pozostałych sposobów można wyróżnić tendencję dla zazwyczaj wyższych wyników przy wyborze \textit{middle} oraz mniej więcej równomierny rozkład dla \textit{last} i \textit{first}, co potwierdza wniosek, że przy losowej liście najbardziej optymalnym sposobem jest wybór pierwszego/ostatniego elementu jako \textit{pivot'a}.
 
 
 
-Podsumowując, sposób wyboru pivota powinno się uzależniać od typu danych, który jest planowany do podania do algorytmu quicksort. Gdy oczekiwana struktura danych jest całkowicie nieuporządkowana, losowa, warto rozważyć randomizowaną wersję algorytmu. Gdy jednak istnieją podejrzenia, że dane mogą być pewnym stopniu uporządkowane, lepszym okaże się zastosowanie klasycznego sposobu wyboru pivota.
+Podsumowując, wyboru pivota powinien być uzależniony od typu danych, który jest przekazywany do algorytmu. Gdy oczekiwana struktura danych jest całkowicie nieuporządkowana, należy rozważyć randomizowaną wersję algorytmu; gdy jednak istnieją podejrzenia, że dane mogą być pewnym stopniu uporządkowane, lepszym wyborem będzie wybór pivot'a jako element ostatni, pierwszy lub środkowy.
 
 
-Ten sam wniosek tyczy się ogólnego wyboru alogrytmu sortującego dla danych, ponieważ istnieją algorytmy, które lepszy czas wykażą dla danych uporządkowanych (sortowanie bąbelkowe, sortowanie przez wstawianie) oraz takie, które lepiej będą się sprawdzały dla danych, które nie są uporządkowane (sortowanie przez kopcowanie, quicksort, sortowanie przez scalanie).
+Wyboru algorytmu sortującego powinien być uzależniony od rodzaju przekazanych danych, ponieważ istnieją algorytmy , które lepszy czas wykażą dla danych uporządkowanych (sortowanie bąbelkowe, sortowanie przez wstawianie) oraz takie, które lepiej będą się sprawdzały dla danych, które nie są uporządkowane (sortowanie przez kopcowanie, quicksort, sortowanie przez scalanie).
 
-\section{Bibliografia}
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{refer.bib}

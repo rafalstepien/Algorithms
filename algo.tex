@@ -34,6 +34,10 @@
        Wydział Biologii i Hodowli Zwierząt\\
        Uniwersytet Przyrodniczy we Wrocławiu\\
        Bioinformatyka\\
+       
+       
+	   \vspace{3.5cm}
+       22.12.2019r.
  
    \end{center}
 \end{titlepage}
@@ -63,14 +67,14 @@ Algorytm jest oparty na technice "dziel i zwyciężaj", którą możemy podzieli
 \end{itemize}
 \newpage
 \section{Podział tablicy}
-Dzięki funkcji def \textit{partition} następuje podzielenie większych problemów na mniejsze. Wykorzystany zostanie \textit{pivot}, czyli element który pozwoli wyznaczyć dwa podproblmy. Elementy na lewo od \textit{pivot'a} będą od niego mniejsze, zaś po jego prawej stronie, większe.
+Dzięki funkcji def \textit{partition} następuje podzielenie większych problemów na mniejsze. Wykorzystany zostanie \textit{pivot}, czyli element który pozwoli wyznaczyć dwa podproblemy. Elementy po lewej stronie \textit{pivot'a} będą od niego mniejsze, zaś po jego prawej stronie, większe.
 
 
 Procedurę zaczęto od wybrania wartości \textit{p}, która ma być pivotem wg. jednej z 4 funkcji (wartość ze zbioru znajdująca się na: końcu, początku, w miejscu środkowym lub z losowego miejsca), względem której będzie dokonywany podział. Indeksem pivota zawsze zostaje miejsce będące ostatnią pozycją analizowanego przedziału.
 
 
 Element $i$-ty to element obecnie poddawany analizie w ciele pętli. Natomiast element $j$-ty jest to tzw. border 
-w którego miejsce wstawiane będą elementy $i$-te. Ostatecznie border wyznacza miejsce w które trafić ma pivot po wyjściu z pętli oraz miejsce zawierające element posortowany, który znajduje się we właściwym miejscu. Pivot nie zostaje analizowany podczas iteracji
+w którego miejsce wstawiane będą elementy $i$-te. Ostatecznie border wyznacza miejsce w które trafić ma pivot po wyjściu z pętli oraz miejsce zawierające element posortowany, który znajduje się we właściwym miejscu. Pivot nie zostaje analizowany podczas iteracji.
 
 
 Procedurę zaczynamy zawsze od początku do końca wyznaczonego zbioru. Element $i$-ty zostaje zamieniony z $j$-tym w momencie, gdy $i<p$. Zbiór analizowany jest element po elemencie. Gdy następuje zamiana, element $j$ zostaje przesunięty $+1$. Komórki zaznaczone na szaro to elementy ulegające zamianie w danym momencie.
@@ -367,7 +371,7 @@ Ze względu na warunek rekurencji część jednoelementowa nie podlega analizie.
 
 Po "sprasowaniu" wszystkich elementów \textbf{pogrubionych} otrzymamy posortowaną listę.
 
-\subsection{Implementacja w Python}
+\subsection{Implementacja funkcji "partition" w Python}
 
 \begin{verbatim}
 def partition(lst, start, stop):
@@ -387,12 +391,12 @@ Pivot można ustalać na 4 różne sposoby. Są to kolejno:
 \begin{itemize}
 \item ostatni element na analizowanej liście,
 \item pierwszy element na analizowanej liście, 
-\item element o środkowym indeksie
-\item element losowo wybrany z analizowanej listy
+\item element o środkowym indeksie,
+\item element losowo wybrany z analizowanej listy.
 \end{itemize} 
-Wszystkie te podejścia testujemy w naszym kodzie.
+Wszystkie podejścia testujemy w naszym kodzie.
 
-\subsection{Implementacja w Python}
+\subsection{Implementacja funkcji wyboru pivota w Python}
 \begin{verbatim}
 def partition_last(lst, start, stop):
     lst[stop], lst[stop] = lst[stop], lst[stop]

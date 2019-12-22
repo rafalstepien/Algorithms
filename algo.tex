@@ -43,7 +43,7 @@ Quicksort został wynaleziony przez brytyjskiego informatyka Tony'ego Hoare'a. J
 
 
 
-W przypadku rozważania efektywności algorytmu quicksort bierze się pod uwagę przede wszystkim dwa przypadki: najlepszy i średni, można jednak wysnuć intuicje dotyczące przypadku najgorszego.
+W przypadku rozważania efektywności algorytmu quicksort bierze się pod uwagę przede wszystkim dwa przypadki: najlepszy i średni, można jednak wysnuć intuicje dotyczące przypadku najgorszego. Wydajność algorytmu będzie zależna miedzy innymi od stopnia posortowania listy jak i metody wyboru \textit{pivot'}a
 \end{abstract}
 
 \chapter{Quicksort}
@@ -518,33 +518,26 @@ Pierwszym testem jest porównanie szybkości działania algorytmu w zależności
 \caption{Wykres zależności czasu od długości listy wsadowej}
 \end{figure}
 
-\paragraph{Wniosek}
-jest następujący: funkcja wyboru \textit{random} działa najszybciej w każdym przypadku długości. Spowodowane jest to zjawiskiem losowego wyboru pivota - daje to największą szansę wybrania wyniku będącego jak najbliższym wartości środkowej. 
+\subsubsection{Wniosek}
+Jest następujący: funkcja wyboru \textit{random} działa najbardziej optymalnie w każdym przypadku długości. Spowodowane jest to zjawiskiem losowego wyboru \textit{pivot'a} - daje to zawsze taką samą szansę wybrania wyniku będącego jak najbliższym wartości środkowej. 
 
 
-\paragraph{Lista w pewnym stopniu posortowana}
+\subsubsection{Lista w pewnym stopniu posortowana}
 Rozważmy przypadek, gdy do algorytmu podawana jest lista w pewnym stopniu posortowana. Wtedy, żeby \textit{pivot} osiągnął wartość jak najbliższą wartości mediany (wtedy algorytm działa najszybciej) najrozsądniejszym wyborem \textit{pivot'a} będzie wybór losowy, gdyż szanse na wybranie każdego elementu będą identyczne.
 
 
-\paragraph{Mała efektywność pivota first/last - przykład}
-W przypadku wyboru \textit{pivot'a} jako pierwszego lub ostatniego elementu, np dla listy posortowanej w pewnym stopniu [1, 4, 3, 2, 5], za każdym razem istnieje ryzyko wielokrotnego wybrania mało optymalnego elementu (np. 1 albo 5, bo lista wtedy zawsze będzie podzielona nie optymalnie). Powoduje to zmniejszenie efektywności algorytmu. Gdyby na przykład do algorytmu, który stworzył wykres, została podana za każdym razem lista tylko i wyłącznie z pierwszym i ostatnim elementem na właściwym miejscu, a funkcją wybierającą \textit{pivot} byłaby "first" lub "last", wydajność algorytmu byłaby drastycznie słaba. Problem ten nie pojawi się w przypadku funkcji random.
-
-
-\paragraph{Lista całkowicie losowa}
-W przypadku listy całkowicie losowej, algorytm otrzymuje taką samą szansę wyboru każdego elementu. Niezależnie w jaki sposób będziemy wybierać \textit{pivot}, szansa na wylosowanie elementu będzie zawsze taka sama.
-
-
+W przypadku wyboru \textit{pivot'a} jako pierwszego lub ostatniego elementu, dla listy posortowanej w pewnym stopniu, za każdym razem istnieje ryzyko wielokrotnego wybrania mało optymalnego elementu (tj. tworzącego jeden podzbiór ze wszystkimi elementami i drugi podzbiór pusty). Powoduje to zmniejszenie efektywności algorytmu. Problem ten nie pojawi się w przypadku funkcji \textit{random}.
 
 \subsection{Szybkość sortowania w 100 losowych przypadkach}
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{Figure_2.pdf}
-\caption{Wykres zależności czasu od ilości iteracji}
-\end{figure}
+
 
 \textit{Rys. 2.3} przedstawia czas działania czterech sposobów wyboru \textit{pivot'a} dla stu przypadków, w przypadku gdy lista jest losowa, a długość listy jest taka sama w każdym przypadku. Można zauważyć, że w takim wypadku losowy wybór \textit{pivot'a} zazwyczaj charakteryzuje się najdłuższym czasem działania. Czerwone trójkąty na wykresie mają reprezentują zazwyczaj największą wartość, ponieważ randomizowanie wyboru powoduje dodatkową stratę czasu. Wśród pozostałych sposobów można wyróżnić tendencję dla zazwyczaj wyższych wyników przy wyborze \textit{middle} oraz mniej więcej równomierny rozkład dla \textit{last} i \textit{first}, co potwierdza wniosek, że przy losowej liście najbardziej optymalnym sposobem jest wybór pierwszego/ostatniego elementu jako \textit{pivot'a}.
 
-
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{Figure_2.pdf}
+\caption{Wykres zależności czasu od ilości iteracji}
+\end{figure}
 
 Podsumowując, wyboru pivota powinien być uzależniony od typu danych, który jest przekazywany do algorytmu. Gdy oczekiwana struktura danych jest całkowicie nieuporządkowana, należy rozważyć randomizowaną wersję algorytmu; gdy jednak istnieją podejrzenia, że dane mogą być pewnym stopniu uporządkowane, lepszym wyborem będzie wybór pivot'a jako element ostatni, pierwszy lub środkowy.
 

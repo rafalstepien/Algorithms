@@ -27,7 +27,7 @@
        \vspace{1.5cm}
  
        Rafał Stępień | Krzysztof Kotlarz \\
-       \vspace{2cm}
+       \vspace{1.5cm}
 
  
        Wydział Biologii i Hodowli Zwierząt\\
@@ -62,17 +62,17 @@ Algorytm jest oparty na technice "dziel i zwyciężaj", którą możemy podzieli
 \end{itemize}
 \newpage
 \section{Podział tablicy}
-Dzięki funkcji def partition następuje podzielenie większych problemów na mniejsze. Wykorzystany zostanie pivot, czyli element który pozwoli wyznaczyć na dwa podproblmy. Elementy na lewo od pivot'a będą od niego mniejsze, zaś po jego prawej stronie, większe.
+Dzięki funkcji def \textit{partition} następuje podzielenie większych problemów na mniejsze. Wykorzystany zostanie \textit{pivot}, czyli element który pozwoli wyznaczyć dwa podproblmy. Elementy na lewo od \textit{pivot'a} będą od niego mniejsze, zaś po jego prawej stronie, większe.
 
 
 Procedurę zaczęto od wybrania wartości \textit{p}, która ma być pivotem wg. jednej z 4 funkcji (wartość ze zbioru znajdująca się na: końcu, początku, w miejscu środkowym lub z losowego miejsca), względem której będzie dokonywany podział. Indeksem pivota zawsze zostaje miejsce będące ostatnią pozycją analizowanego przedziału.
 
 
-Element $i$-ty to element obecnie poddawany analizie w ciele pętli. natomiast element $j$-ty jest to tzw. border 
+Element $i$-ty to element obecnie poddawany analizie w ciele pętli. Natomiast element $j$-ty jest to tzw. border 
 w którego miejsce wstawiane będą elementy $i$-te. Ostatecznie border wyznacza miejsce w które trafić ma pivot po wyjściu z pętli oraz miejsce zawierające element posortowany, który znajduje się we właściwym miejscu. Pivot nie zostaje analizowany podczas iteracji
 
 
-Procedurę zaczynamy zawsze od początku do końca wyznaczonego zbioru. Element $i$-ty zostaje zamieniony z $j$-tym w momencie, gdy i$<$p. Zbiór analizowany jest element po elemencie. Gdy następuje zamiana, element $j$ zostaje przesunięty $+1$. Komórki zaznaczone na szaro to elementy ulegające zamianie w danej iteracji.
+Procedurę zaczynamy zawsze od początku do końca wyznaczonego zbioru. Element $i$-ty zostaje zamieniony z $j$-tym w momencie, gdy $i<p$. Zbiór analizowany jest element po elemencie. Gdy następuje zamiana, element $j$ zostaje przesunięty $+1$. Komórki zaznaczone na szaro to elementy ulegające zamianie w danym momencie.
 \begin{table}[h!]
 \Large
 \centering
@@ -85,7 +85,7 @@ i=j&  & &  &  & p\\ \hline
 
 \end{table}
 
-Element $i$-ty = 2 jest mniejszy od p$=$5. Zostaje on zamieniony z elementem $j$-tym. W tym przypadku następują zamiana w miejscu.
+Element $i$-ty$=$2 jest mniejszy od p$=$5. Zostaje on zamieniony z elementem $j$-tym. W tym przypadku następują zamiana w miejscu.
 
 \begin{table}[h!]
 \Large
@@ -140,6 +140,7 @@ Elementy i$=$1 jest mniejszy od wartości $p=$5 zostaje zamieniony z elementem $
 
 \end{table}
 
+
 Elementy i$=$3 jest mniejszy od wartości p$=$5 zostaje zamieniony z elementem $j=$7 
 
 \begin{table}[h!]
@@ -154,6 +155,7 @@ Elementy i$=$3 jest mniejszy od wartości p$=$5 zostaje zamieniony z elementem $
 
 \end{table}
 
+\newpage
 Pivot nie jest analizowany w pętli. Gdy pętla dobiegnie końca pivot $p$ zamieniany jest z elementem $j-$tym.
 
 
@@ -169,7 +171,7 @@ Pivot nie jest analizowany w pętli. Gdy pętla dobiegnie końca pivot $p$ zamie
 
 \end{table}
 
-Duży problem został podzielony na dwa mniejsze; lewą oraz prawą część tablicy. W momencie pivot $p$ jest uważany za posortowany, który znajduje się we właściwym dla siebie miejscu. Następnie rekurencyjnie wywołujemy tą samą funkcje, jednak tym razem dotyczyć ona będzie jedynie jednego z podproblemów. Funkcja $partition$ analizować będzie teraz lewą część tablicy
+Duży problem został podzielony na dwa mniejsze; lewą oraz prawą część tablicy. W tym momencie \textit{pivot} $p$ jest uważany za posortowany, znajduje się we właściwym dla siebie miejscu. Następnie rekurencyjnie wywołujemy tą samą funkcje, jednak tym razem dotyczyć ona będzie jedynie jednego z podproblemów. Funkcja $partition$ analizować będzie teraz lewą część tablicy
 
 \begin{table}[h!]
 \Large
@@ -232,13 +234,14 @@ Pivot nie jest analizowany w pętli. Gdy pętla dobiegnie końca pivot $p$ zamie
 Pivot $p$ znajduje się we właściwym dla siebie miejscu. 
 Następuje analiza kolejnego podproblemu. Zbiór składa się z lewej części tablicy zawierającej 2 elementy, oraz prawej części tablicy zawierającej 0 elementów.
 
+\newpage
 \begin{table}[h!]
 \Large
 \centering
 \begin{tabular}{|c|c|}
 \hline
 \multicolumn{2}{|c|}{Lewa część} \\ \hline
-\cellcolor{black!25}2 & 1 \\ \hdashline
+2 & 1 \\ \hdashline
 i=j & p \\ \hline
 \end{tabular}
 
@@ -256,9 +259,6 @@ j & p \\ \hline
 \end{tabular}
 
 \end{table}
-
-Pozycja pivota $p$ znajduje się na ostatniej pozycji analizowanego zbioru. Iteracje rozpoczynamy od początku listy. 
-
 
 Element $i=$2 nie zostaje przeniesiony. Pivot $p$ nie jest analizowany, zamieniany jest z elementem $j$-tym.
 
@@ -331,8 +331,10 @@ Elementy $i=$7 jest mniejszy od wartości $p=$8 zostaje on zamieniony z elemente
 \end{tabular}
 
 \end{table}
+
 Po zamianie następuje przesunięcie elementu $j$-tego +1. Pivot $p$ zamieniany jest z elementem $j$-tym. Następuje zamiana w miejscu
 
+\newpage
 \begin{table}[h!]
 \Large
 \centering
@@ -359,7 +361,7 @@ Lewa \\ \hline
 
 \end{table}
 
-Pivot $p$ znajduje się we właściwym dla siebie miejscu. Ze względu na warunek rekurencji część jednoelementowa nie podlega analizie. Element znajduje się we właściwej dla sienie pozycji.
+Ze względu na warunek rekurencji część jednoelementowa nie podlega analizie. Element znajduje się we właściwej dla siebie pozycji.
 
 
 Po "sprasowaniu" wszystkich elementów \textbf{pogrubionych} otrzymamy posortowaną listę.
@@ -390,7 +392,6 @@ Pivot można ustalać na 4 różne sposoby. Są to kolejno:
 Wszystkie te podejścia testujemy w naszym kodzie.
 
 \subsection{Implementacja w Python}
-
 \begin{verbatim}
 def partition_last(lst, start, stop):
     lst[stop], lst[stop] = lst[stop], lst[stop]
@@ -411,19 +412,19 @@ def partition_first(lst, start, stop):
     lst[stop], lst[start] = lst[start], lst[stop]
     return partition(lst, start, stop)
 \end{verbatim}
-\textbf{Partition last} - pivot wybierany jako pierwszy element z analizowanej listy.
+\textbf{Partition first} - pivot wybierany jako pierwszy element z analizowanej listy.
 
 \begin{verbatim}
 def partition_middle(lst, start, stop):
-    med = (len(lst)) // 2
+    med = (start + stop) // 2
     lst[stop], lst[med] = lst[med], lst[stop]
     return partition(lst, start, stop)
 \end{verbatim}
-\textbf{Partition last} - pivot wybierany jako środkowy element z analizowanej listy.
+\textbf{Partition middle} - pivot wybierany jako środkowy element z analizowanej listy.
 
 \section{Funkcja właściwa \textit{Quicksort}}
 
-Jeśli długość tablicy jest większa niż indeks pierwszego elementu, to do zmiennej q zapisz wynik procedury "partition" na podanej tablicy A (czyli indeks pivota), i dokonaj podziału dwóch utworzonych podtablic metodą quicksort: 
+Jeśli długość tablicy jest większa niż indeks pierwszego elementu, to do zmiennej \textit{q} zapisz wynik procedury \textit{partition} na podanej tablicy $A$ (czyli indeks pivota) i dokonaj podziału dwóch utworzonych podtablic funkcją  quicksort: 
 
 \begin{verbatim}
 def quick_sort(lst, start, stop, fun):
@@ -442,7 +443,7 @@ Definiujemy funkcję quicksort, przyjmującą parametry:
 \item \textit{fun} - funkcja wyboru pivot'a (wybierana spośród czterech: element pierwszy, ostatni, losowy, lub o środkowym indeksie z analizowanego podzbioru.
 \end{itemize}
 
-Blok \textit{if} warunkuje, że ostatni element na liście ma większy indeks niż element pierwszy. Po spełnieniu tego warunku do zmiennej \textit{border} zapisano wartość, którą zwraca nam funkcja wyboru pivota \textit{partition} działająca na parametrach: \textit{lista}, \textit{start}, \textit{stop}; tak więc zostaje zwrócony indeks pivot'a, po czym przystępujemy do podziału tablicy na dwie podtablice, każda jest sortowana osobnym, rekurencyjnym wywołaniem quicksort.
+Blok \textit{if} warunkuje, że ostatni element na liście ma większy indeks niż element pierwszy. Po spełnieniu tego warunku do zmiennej \textit{border} zapisano wartość, którą zwraca nam funkcja wyboru pivota \textit{partition}. Kolejno przystępujemy do podziału tablicy na dwie podtablice, każda jest sortowana osobnym, rekurencyjnym wywołaniem quicksort.
 
 
 
@@ -463,11 +464,11 @@ T(n) = \theta(n log_{2} n)
 \end{equation*}
 
 \section{Średni przypadek}
-Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku $\theta(nlgn)$, co jest bardzo dobrym wynikiem, ze względu na powolny wzrost funkcji logarytmicznej (ryc. 1).
+Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku $\theta(nlogn)$, co jest bardzo dobrym wynikiem, ze względu na powolny wzrost funkcji logarytmicznej (Rys. 1). Dzieje się tak ze względu na to, że działanie algorytmu zależy od stopnia posortowania listy, a nie od wartości elementów.
 
 \begin{figure}[h!]
 \centering
-\begin{tikzpicture}[scale=1, transform shape]
+\begin{tikzpicture}[scale=0.95, transform shape]
 \begin{axis}[grid=both,
 	  xlabel=$n$,
       ylabel=$y$,
@@ -488,8 +489,7 @@ Złożoność obliczeniowa jak wyżej wspomnieliśmy wynosi w średnim przypadku
 \caption{wykres dla funkcji: $y=n$, $y=2^n$, $y=log_2n$, $y=2log_2n$}
 \end{figure}
 
-Dzieje się tak ze względu na to, że działanie algorytmów zależy od kolejności elementów w tablicy wejściowej, a nie od ich konkretnej wartości. W przypadku średnim, procedura tworzy mieszankę "dobrych" i "złych" podziałów.
-
+\newpage
 \section{Najgorszy przypadek}
 Istnieje też druga strona medalu i przypadek najgorszy. Następuje on, gdy podziały są maksymalnie niezrównoważone i za każdym razem tablica jest dzielona na dwie podtablice zawierające odpowiednio $n-1$ oraz 0 elementów. Wtedy koszt jednego podziału wynosi $\theta (n)$. Opisuje to rekurencyjne równanie:
 \begin{equation*}
@@ -510,7 +510,7 @@ Co daje czas działania tak wolny jak sortowanie przez wstawianie.
 
 \section{Testy}
 \subsection{Zależność czasu od długości listy wsadowej}
-Pierwszym testem jest porównanie szybkości działania algorytmu w zależności od długości listy. Testowi poddawane są wszystkie cztery funkcje wyboru \textit{pivota}, każda funkcja w jednej iteracji otrzymuje identyczną listę określonej długości, co pozwoli na otrzymanie wiarygodnego i zdatnego do porównania wyniku:
+Pierwszym testem jest porównanie szybkości działania algorytmu w zależności od długości listy. Testowi poddawane są wszystkie cztery funkcje wyboru \textit{pivot'a}, każda funkcja w jednej iteracji otrzymuje identyczną listę określonej długości, co pozwoli na otrzymanie wiarygodnego i zdatnego do porównania wyniku:
 
 \begin{figure}[h!]
 \centering
@@ -519,7 +519,7 @@ Pierwszym testem jest porównanie szybkości działania algorytmu w zależności
 \end{figure}
 
 \subsubsection{Wniosek}
-Jest następujący: funkcja wyboru \textit{random} działa najbardziej optymalnie w każdym przypadku długości. Spowodowane jest to zjawiskiem losowego wyboru \textit{pivot'a} - daje to zawsze taką samą szansę wybrania wyniku będącego jak najbliższym wartości środkowej. 
+Funkcja wyboru \textit{random} działa najbardziej optymalnie w każdym przypadku długości. Spowodowane jest to zjawiskiem losowego wyboru \textit{pivot'a} - daje to zawsze taką samą szansę wybrania wyniku będącego jak najbliższym wartości środkowej. 
 
 
 \subsubsection{Lista w pewnym stopniu posortowana}
@@ -539,7 +539,7 @@ W przypadku wyboru \textit{pivot'a} jako pierwszego lub ostatniego elementu, dla
 \caption{Wykres zależności czasu od ilości iteracji}
 \end{figure}
 
-Podsumowując, wyboru pivota powinien być uzależniony od typu danych, który jest przekazywany do algorytmu. Gdy oczekiwana struktura danych jest całkowicie nieuporządkowana, należy rozważyć randomizowaną wersję algorytmu; gdy jednak istnieją podejrzenia, że dane mogą być pewnym stopniu uporządkowane, lepszym wyborem będzie wybór pivot'a jako element ostatni, pierwszy lub środkowy.
+Podsumowując, wyboru pivot'a powinien być uzależniony od typu danych, który jest przekazywany do algorytmu. Gdy oczekiwana struktura danych jest całkowicie nieuporządkowana, należy rozważyć randomizowaną wersję algorytmu; gdy jednak istnieją podejrzenia, że dane mogą być pewnym stopniu uporządkowane, lepszym wyborem będzie wybór pivot'a jako element ostatni, pierwszy lub środkowy.
 
 
 Wyboru algorytmu sortującego powinien być uzależniony od rodzaju przekazanych danych, ponieważ istnieją algorytmy , które lepszy czas wykażą dla danych uporządkowanych (sortowanie bąbelkowe, sortowanie przez wstawianie) oraz takie, które lepiej będą się sprawdzały dla danych, które nie są uporządkowane (sortowanie przez kopcowanie, quicksort, sortowanie przez scalanie).

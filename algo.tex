@@ -26,7 +26,8 @@
  
        \vspace{1.5cm}
  
-       Rafał Stępień | Krzysztof Kotlarz \\
+       Rafał Stępień \\
+       Krzysztof Kotlarz \\
        \vspace{1.5cm}
 
  
@@ -43,7 +44,7 @@ Quicksort został wynaleziony przez brytyjskiego informatyka Tony'ego Hoare'a. J
 
 
 
-W przypadku rozważania efektywności algorytmu quicksort bierze się pod uwagę przede wszystkim dwa przypadki: najlepszy i średni, można jednak wysnuć intuicje dotyczące przypadku najgorszego. Wydajność algorytmu będzie zależna miedzy innymi od stopnia posortowania listy jak i metody wyboru \textit{pivot'}a
+W przypadku rozważania efektywności algorytmu quicksort bierze się pod uwagę przede wszystkim dwa przypadki: najlepszy i średni, można jednak wysnuć intuicje dotyczące przypadku najgorszego. Wydajność algorytmu będzie zależna miedzy innymi od stopnia posortowania listy jak i metody wyboru \textit{pivot'}a.
 \end{abstract}
 
 \chapter{Quicksort}
@@ -52,7 +53,7 @@ Algorytm jest oparty na technice "dziel i zwyciężaj", którą możemy podzieli
 \begin{enumerate}
 \item \textbf{Dziel} - Tablica $A[]$ jest dzielona na dwie części, takie, że każdy element tablicy pierwszej jest nie większy niż $A[q]$, a każdy element tablicy drugiej jest większy od $A[q]$. Możemy wywnioskować że bardzo ważnym krokiem będzie wybór elementu $A[q]$.
 \item \textbf{Zwyciężaj} - Obydwie podtablice są sortowane rekurencyjnymi wywołaniami quicksort.
-\item \textbf{Połącz} - Z racji tego, że sortowanie odbywa się w miejscu nie musimy łączyć tablic, ponieważ są one już automatycznie połączone.
+\item \textbf{Połącz} - Z racji tego, że sortowanie odbywa się w locie nie musimy łączyć tablic, ponieważ są one już automatycznie połączone.
 \end{enumerate}
 \subsection*{Właściwości algorytmu}
 \begin{itemize}

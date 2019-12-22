@@ -518,11 +518,21 @@ Pierwszym testem jest porównanie szybkości działania algorytmu w zależności
 \caption{Wykres zależności czasu od długości listy wsadowej}
 \end{figure}
 
+\paragraph{Wniosek}
+jest następujący: funkcja wyboru \textit{random} działa najszybciej w każdym przypadku długości. Spowodowane jest to zjawiskiem losowego wyboru pivota - daje to największą szansę wybrania wyniku będącego jak najbliższym wartości środkowej. 
 
-Wniosek, jest następujący: funkcja wyboru \textit{random} działa najszybciej w każdym przypadku długości. Spowodowane jest to zjawiskiem losowego wyboru pivota, ponieważ daje to największą szansę wybrania wyniku będącego jak najbliższym wartości środkowej. 
+
+\paragraph{Lista w pewnym stopniu posortowana}
+Rozważmy przypadek, gdy do algorytmu podawana jest lista w pewnym stopniu posortowana. Wtedy, żeby \textit{pivot} osiągnął wartość jak najbliższą wartości mediany (wtedy algorytm działa najszybciej) najrozsądniejszym wyborem \textit{pivot'a} będzie wybór losowy, gdyż szanse na wybranie każdego elementu będą identyczne.
 
 
-Rozważmy przypadek, gdy do algorytmu podawana jest lista, która wygenerowana losowo jest w pewnym stopniu posortowana - wtedy żeby \textit{pivot} osiągnął wartość jak najbliższą wartości mediany (ponieważ wtedy algorytm działa najszybciej), której nie znamy, najrozsądniejszym wyborem \textit{pivot'a} będzie wybór losowy, bo wtedy szanse na wybranie każdego elementu są identyczne; w przypadku listy, która nie jest posortowana, algorytm także otrzymuje takie same szanse dla każdego elementu. W przypadku wyboru \textit{pivot'a} ze stałego miejsca jakim jest na przykład pierwszy lub ostatni element, gdy podawana jest lista uporządkowana,  istnieje ryzyko wielokrotnego wybrania mało optymalnego elementu za każdym razem, co powoduje zmniejszenie efektywności algorytmu. Gdyby na przykład do algorytmu, który stworzył wykres, została podana za każdym razem lista tylko i wyłącznie z pierwszym i ostatnim elementem na właściwym miejscu, a funkcją wybierającą \textit{pivot} byłaby "first" lub "last", wydajność algorytmu byłaby drastycznie słaba. Problem ten nie pojawi się w przypadku funkcji random.
+\paragraph{Mała efektywność pivota first/last - przykład}
+W przypadku wyboru \textit{pivot'a} jako pierwszego lub ostatniego elementu, np dla listy posortowanej w pewnym stopniu [1, 4, 3, 2, 5], za każdym razem istnieje ryzyko wielokrotnego wybrania mało optymalnego elementu (np. 1 albo 5, bo lista wtedy zawsze będzie podzielona nie optymalnie). Powoduje to zmniejszenie efektywności algorytmu. Gdyby na przykład do algorytmu, który stworzył wykres, została podana za każdym razem lista tylko i wyłącznie z pierwszym i ostatnim elementem na właściwym miejscu, a funkcją wybierającą \textit{pivot} byłaby "first" lub "last", wydajność algorytmu byłaby drastycznie słaba. Problem ten nie pojawi się w przypadku funkcji random.
+
+
+\paragraph{Lista całkowicie losowa}
+W przypadku listy całkowicie losowej, algorytm otrzymuje taką samą szansę wyboru każdego elementu. Niezależnie w jaki sposób będziemy wybierać \textit{pivot}, szansa na wylosowanie elementu będzie zawsze taka sama.
+
 
 
 \subsection{Szybkość sortowania w 100 losowych przypadkach}

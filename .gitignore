@@ -1,5 +1,11 @@
 algo.aux
-algo.log
-algo.pdf
 algo.synctex.gz
 algo.toc
+*.pdf
+refer.bib
+*.pptx
+*.log
+algo.bbl
+algo.blg
+algo.tex
+*.py
